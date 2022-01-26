@@ -1,5 +1,5 @@
 import ClockItem from "./ClockItem";
-import { nanoid } from 'nanoid'
+
 
 function ClockItems(props) {
   const clockItems = props.clockItems;
@@ -7,7 +7,7 @@ function ClockItems(props) {
   return (
     <>
       {clockItems.map(item => (
-       <ClockItem clock={item} id={nanoid()} key={nanoid()} handleDelete={handleDelete}/>
+        <ClockItem clock={item} id={item.id} key={item.id} handleDelete={handleDelete} />
       ))}
     </>
   )

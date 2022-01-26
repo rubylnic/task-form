@@ -1,7 +1,7 @@
 import React from 'react';
 
-Date.prototype.addHours= function(h){
-  this.setHours(this.getHours()+h);
+Date.prototype.addHours = function (h) {
+  this.setHours(this.getHours() + h);
   return this;
 }
 
@@ -41,11 +41,12 @@ class ClockItem extends React.Component {
   }
 
   render() {
+
     return (
       <div>
         <div className="clock__item" id={this.props.id}>
-           {this.state.date.toLocaleTimeString()}
-           <button onClick={this.props.handleDelete}>&#10008;</button>
+          {this.state.date.toLocaleTimeString()}
+          <button onClick={this.props.handleDelete}>&#10008;</button>
         </div>
       </div>
     );

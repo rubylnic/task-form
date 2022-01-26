@@ -14,13 +14,13 @@ function App() {
       {/* <Calculator/> */}
       {/* <LifeComponent/> */}
       {/* <CircleChart/> */}
-      {/* <CRUDApp/> */}
-      <Clock/>
+      <CRUDApp />
+      <Clock />
       {/* <WindowResizeApp/>
       <ChartApp/> */}
     </>
   );
 }
-  
+
 export default App;
 
