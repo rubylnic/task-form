@@ -1,25 +1,19 @@
 import React from "react";
 
 
-class Card extends React.Component  {
-  deleteHandle = this.props.deleteHandle;
-  loadActualCards = this.props.loadActualCards;
+class Card extends React.Component {
 
-  state = {
-    deleted: false,
-  }
-
-  onDeleteClick = (evt) => {
-    this.deleteHandle(evt);
-    this.loadActualCards();
+  onDeleteClick = (id) => {
+    this.props.deleteHandle(id);
+    this.props.loadActualCards();
   }
 
   render() {
-    const card = this.props.props;
+    const card = this.props.card;
     return (
       <div className="card" id={card.id}>
-      {card.content ? card.content : ''}
-      <button className="card__close" onClick={this.onDeleteClick}>&#10008;</button>
+        {card.content ? card.content : ''}
+        <button className="card__close" onClick={() => this.onDeleteClick(card.id)}>&#10008;</button>
       </div>
     )
   }

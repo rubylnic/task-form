@@ -5,7 +5,6 @@ import Card from "./Card";
 import ReactDOM from "react-dom";
 class CRUDApp extends React.Component {
   state = {
-    changed: 0,
     cardsArr: []
   }
 
@@ -19,38 +18,32 @@ class CRUDApp extends React.Component {
       });
   }
 
-  postCards = (data) => {
-    fetch(process.env.REACT_APP_CARDS_URL, {
+  postCards = async (data) => {
+    await fetch(process.env.REACT_APP_CARDS_URL, {
       method: 'POST',
       body: JSON.stringify(data),
       headers: {
         'Content-Type': 'application/json'
       }
     });
+    await this.loadActualCards();
   }
 
   componentDidMount() {
     this.loadActualCards();
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (this.state.changed !== prevState.changed) {
-      this.loadActualCards();
-      console.log('changed')
-    }
-  }
+  deleteHandle = async (id) => {
 
-  deleteHandle = (evt) => {
-    const id = evt.target.parentElement.id;
-
-    this.setState(prevState => ({
-      changed: prevState.changed += 1
-    }));
-
-    fetch(process.env.REACT_APP_CARDS_URL + '/' + id, {
+    await fetch(process.env.REACT_APP_CARDS_URL + '/' + id, {
       method: 'DELETE'
     });
 
+    await this.loadActualCards();
+  }
+
+  handleChange = evt => {
+    console.log(evt)
   }
 
   handleSubmit = evt => {
@@ -63,11 +56,6 @@ class CRUDApp extends React.Component {
     }
 
     this.postCards(json);
-
-    this.setState(prevState => ({
-      changed: prevState.changed += 1
-    }));
-
     input.value = '';
   }
 
