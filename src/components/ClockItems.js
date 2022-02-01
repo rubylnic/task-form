@@ -7,7 +7,7 @@ function ClockItems(props) {
   return (
     <>
       {clockItems.map(item => (
-        <ClockItem clock={item} id={item.id} key={item.id} handleDelete={handleDelete} />
+        <ClockItem clock={item} id={item.id} key={item.id} handleDelete={() => handleDelete(item.id)} />
       ))}
     </>
   )

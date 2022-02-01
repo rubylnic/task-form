@@ -8,19 +8,18 @@ Date.prototype.addHours = function (h) {
 class ClockItem extends React.Component {
   constructor(props) {
     super(props);
-    this.props = props;
-    this.timeDiff = props.clock.time;
-    this.name = props.clock.name;
-    this.calculatedTime = new Date().addHours(+this.timeDiff);
-
-    this.state = {
-      date: this.calculatedTime
-    }
   }
 
+  // getId() {
+  //   console.log(props)
+  // }
 
   state = {
-    time: this.calculatedTime
+    time: this.getCalculatedTime()
+  }
+
+  getCalculatedTime() {
+    return new Date().addHours(+this.props.clock.time);
   }
 
   componentDidMount() {
@@ -41,11 +40,10 @@ class ClockItem extends React.Component {
   }
 
   render() {
-
     return (
       <div>
         <div className="clock__item" id={this.props.id}>
-          {this.state.date.toLocaleTimeString()}
+          {this.state.time.toLocaleTimeString()}
           <button onClick={this.props.handleDelete}>&#10008;</button>
         </div>
       </div>

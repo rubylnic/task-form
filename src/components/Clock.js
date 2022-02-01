@@ -3,33 +3,49 @@ import ClockItems from "./ClockItems";
 import { nanoid } from 'nanoid'
 class Clock extends React.Component {
 
-  state = {
-    clockItems: []
+  constructor(props) {
+    super(props);
+    this.state = {
+      clockItems: [],
+    };
+
+    this.handleInputChange = this.handleInputChange.bind(this);
   }
 
   handleSubmit = (evt) => {
     evt.preventDefault();
-    const name = evt.target.querySelector('#name');
-    const time = evt.target.querySelector('#time');
+    const name = this.state.name;
+    const time = this.state.time;
+
     const clockItem = {
-      name: name.value,
-      time: time.value,
+      name: name,
+      time: time,
       id: nanoid()
     }
 
     let clockItemsArr = [...this.state.clockItems];
+
     clockItemsArr.push(clockItem)
 
     this.setState({
-      clockItems: clockItemsArr
+      clockItems: clockItemsArr,
     });
 
-    name.value = '';
-    time.value = '';
+    evt.target.reset();
   }
 
-  handleDelete = (evt) => {
-    const itemId = evt.target.parentElement.id;
+  handleInputChange(evt) {
+    const target = evt.target;
+    const value = target.value;
+    const name = target.name;
+
+    this.setState({
+      [name]: value
+    });
+  }
+
+  handleDelete = (id) => {
+    const itemId = id;
     const items = this.state.clockItems.filter(item => item.id !== itemId);
     this.setState({ clockItems: items });
   }
@@ -40,11 +56,11 @@ class Clock extends React.Component {
         <form className="clock__form" onSubmit={this.handleSubmit}>
           <label>
             Название
-            <input type="text" id="name" name="name" required />
+            <input type="text" id="name" name="name" onChange={this.handleInputChange} required />
           </label>
           <label>
             Временная зона
-            <input type="number" id="time" name="hours" required />
+            <input type="number" id="time" name="time" onChange={this.handleInputChange} required />
           </label>
           <input type="submit" value="add" />
         </form>
