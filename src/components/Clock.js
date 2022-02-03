@@ -7,9 +7,12 @@ class Clock extends React.Component {
     super(props);
     this.state = {
       clockItems: [],
+      name: '',
+      time: ''
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleSubmit = (evt) => {
@@ -29,9 +32,11 @@ class Clock extends React.Component {
 
     this.setState({
       clockItems: clockItemsArr,
+      name: '',
+      time: ''
     });
 
-    evt.target.reset();
+    // evt.target.reset();
   }
 
   handleInputChange(evt) {
@@ -40,7 +45,7 @@ class Clock extends React.Component {
     const name = target.name;
 
     this.setState({
-      [name]: value
+      [name]: value,
     });
   }
 
@@ -56,11 +61,11 @@ class Clock extends React.Component {
         <form className="clock__form" onSubmit={this.handleSubmit}>
           <label>
             Название
-            <input type="text" id="name" name="name" onChange={this.handleInputChange} required />
+            <input type="text" id="name" name="name" value={this.state.name} onChange={this.handleInputChange} required />
           </label>
           <label>
             Временная зона
-            <input type="number" id="time" name="time" onChange={this.handleInputChange} required />
+            <input type="number" id="time" name="time" value={this.state.time} onChange={this.handleInputChange} required />
           </label>
           <input type="submit" value="add" />
         </form>
